@@ -10,6 +10,12 @@ Rails.application.routes.draw do
       
       resources :book_categories, only: [:index]
       resources :imports, only: [:index, :create]
+
+      resources :sessions, only: [:create]
+        delete 'logout', to: 'sessions#logout'
+        get 'logged_in', to: 'sessions#logged_in'
+
+      post 'sign_in', to: 'registrations#create'
     end
   end
 

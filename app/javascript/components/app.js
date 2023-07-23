@@ -1,5 +1,8 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import SignUp from './sessions/signUp';
+import Login from './sessions/login';
+import IndexPage from './home/indexPage';
 import Home from './home/home';
 import Imports from './imports/imports';
 import Writers from './writers/writers';
@@ -12,7 +15,12 @@ import Book from './book/book';
 const App = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<Home/>} />
+      <Route exact path="/" element={<IndexPage/>} />
+
+      <Route path={"/signup"} element={<SignUp/>} />
+      <Route path={"/login"} element={<Login/>} />
+
+      <Route path={"/home"} element={<Home/>} />
 
       <Route path={"/writers"} element={<Writers/>} />
       <Route path={"/writers/:id"} element={<Writer/>} />

@@ -2,6 +2,8 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 require 'faker'
 
+User.create(name: 'Anna', email: 'anna@anna.com', password: '!12345678@')
+
 BookCategory.create([ 
   { name: 'Artes'}, 
   { name: 'Gastronomia e Culinária'}, 
