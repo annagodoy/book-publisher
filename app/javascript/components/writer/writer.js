@@ -41,14 +41,15 @@ const Writer = () => {
   const [writer, setWriter] = useState({});
   const [loaded, setLoaded] = useState(false)
 
-  const [book, setBook] = useState({});
-  const [books, setBooks] = useState({title: '', isbn: '', publish_date: '', summary: '', book_category: ''});
+  const [book, setBook] = useState({title: '', isbn: '', publish_date: '', summary: '', book_category: '', writer: ''});
+  const [books, setBooks] = useState([]);
   const [error, setError] = useState('')
 
   useEffect(() => {
     axios.get(`/api/v1/writers/${id}`)
     .then( resp => {
       setWriter(resp.data)
+      setBooks(resp.data.included)
       setLoaded(true)
     })
     .catch( resp => console.log(resp))
@@ -68,21 +69,22 @@ const Writer = () => {
     const writer_id = writer.data.id
     axios.post('/api/v1/books', { book, writer_id })
     .then( resp => {
-      const included = [...writer.included, resp.data]
-      setWriter({...writer, included})
-      setBook({title: '', isbn: '', publish_date: '', summary: '', book_category: ''})
+      setBooks([...books, resp.data.data])
+      setBook({title: '', isbn: '', publish_date: '', summary: '', book_category: '', writer: ''})
+      setError('')
     })
     .catch( resp => console.log(resp))
   }
 
   let writerBook; 
   
-  if ( loaded && writer.included) { 
-    writerBook = writer.included.map((item, index) => {
+  if ( loaded && books) { 
+    writerBook = books.map((book, index) => {
       return (
         <Book
           key={index}
-          attributes={item.attributes}
+          id={book.id}
+          attributes={book.attributes}
         />
       )
     })

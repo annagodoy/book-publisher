@@ -56,7 +56,6 @@ const Book = () => {
   useEffect(() => {
     axios.get(`/api/v1/books/${id}`)
     .then(resp => {
-      console.log(resp.data.data)
       setBook(resp.data.data)
       setLoaded(true)
     })
