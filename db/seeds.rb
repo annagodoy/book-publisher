@@ -22,6 +22,7 @@ writers.each do |writer|
   Writer.create(name: writer[:name], document: Faker::IDNumber.brazilian_citizen_number)
 end
 
+sum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tortor eros, pulvinar quis tincidunt vestibulum, facilisis nec risus. Sed efficitur, nibh non feugiat vestibulum, sapien nisi ultricies enim, a facilisis tellus tellus non lacus. Cras ut laoreet felis, at faucibus odio. Ut eget purus quam. Pellentesque et enim a libero dignissim bibendum. Nam et vehicula mi. Praesent pellentesque tristique nisl, sed varius mauris mattis eu. Cras efficitur lorem eu nunc scelerisque euismod. Vivamus ultrices sem quis dolor lacinia feugiat ornare consequat metus. Proin tortor dolor, euismod a vulputate eget, pharetra sed diam. Sed tempus arcu ac arcu vulputate scelerisque. Pellentesque sed ligula ut nisl pellentesque aliquam et at nisl. Fusce viverra sem ut neque rhoncus vestibulum."
 
 BookCategory.all.each do |category|
   Writer.all.each do |writer|
@@ -29,7 +30,7 @@ BookCategory.all.each do |category|
       isbn: Faker::Number.number(digits: 13), 
       title: Faker::Book.title, 
       publish_date: Faker::Date.between(from: 10.years.ago, to: Date.today),
-      summary: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
+      summary: sum,
       writer_id: writer.id, 
       book_category_id: category.id
     )
