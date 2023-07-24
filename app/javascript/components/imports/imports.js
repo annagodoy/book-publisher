@@ -1,6 +1,67 @@
 import React, { useState }  from 'react';
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    font-size: 2rm;
+  }
+`
+
+const Field = styled.div `
+  padding: 10px 20px;
+
+  input {
+    width: 50%;
+    height: 43px;
+    border-radius: 7px;
+    border: 2px solid #000000;
+    text-align: center;
+    font-size: 14px;
+    color: #6d6d6d;
+  }
+
+ input[type="file"]::file-selector-button {
+    background: #6d6d6d; 
+    color: #efefef;
+    border-radius: 4px;
+    border: 0.7px solid #6d6d6d;
+    height: 22px;
+    margin-left: 200px;
+    margin-top: 10px
+  }
+
+  select {
+    width: 50%;
+    height: 43px;
+    border-radius: 7px;
+    border: 2px solid #000000;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    color: #6d6d6d;
+  }
+`
+
+const Button = styled.div`
+  button { 
+    font-size: 18px;
+    width: 20%;
+    height: 45px;
+    border-radius: 12px;
+    margin-top: 15px;
+    color: #efefef;
+    background: #000000;
+    border: 1px solid #000000;
+  }
+`
 
 const Imports = () => {
 
@@ -47,28 +108,28 @@ const Imports = () => {
   }
 
   return (
-    <div className="imports">
-      <div className="newWwriter">
-        <h2> Importação de dados </h2>
+    <Wrapper>
+      <h2> Importação de dados </h2>
         
-        <form onSubmit={handleSubmit} id="importsForm">
-          <div className="field">
-            <input type="file" accept={".csv"} onChange={handleChange} name="file" id="uploadFile"/>
+      <form onSubmit={handleSubmit} id="importsForm">
+        <Field>
+          <input type="file" accept={".csv"} onChange={handleChange} name="file" id="uploadFile"/>
+        </Field>
+        
+        <Field>
+          <div className="importCategory">
+            <select onChange={handleChange} name="kind" >
+              { importTypes.map((options, i) => <option key={options.value} value={options.value}> { options.label } </option>) }
+            </select>
           </div>
-          
-          <div className="field">
-            <h6> Selecione o tipo de importação </h6>
-            <div className="importCategory">
-              <select onChange={handleChange} name="kind" >
-                { importTypes.map((options, i) => <option key={options.value} value={options.value}> { options.label } </option>) }
-              </select>
-            </div>
-          </div>
+        </Field>
 
+        <Button>
           <button>Importar arquivo</button>
-        </form>
-      </div>
-    </div>
+        </Button>
+      </form>
+
+    </Wrapper>
   )
 }
 

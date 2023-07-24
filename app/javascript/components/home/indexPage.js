@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { withRouter, useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styled from 'styled-components';
 import Login from '../sessions/login';
 
 const IndexPage = (props) => {

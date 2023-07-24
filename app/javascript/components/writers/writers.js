@@ -22,6 +22,7 @@ const Header = styled.div`
 const Subheader = styled.div`
   font-weight: 300;
   font-size: 26px;
+  padding: 10px 10px 30px 10px
 `
 
 const Grid = styled.div`
@@ -29,7 +30,20 @@ const Grid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
   width: 100%;
-  padding: 20px;
+  padding: 20px 20px 45px 20px;
+`
+
+const NewWriter = styled.div`
+
+  a {
+    color: #ffffff;
+    background: #000000;
+    border-radius: 4px;
+    padding: 10px 50px;
+    width: 100%;
+    text-decoration: none
+  }
+  
 `
 
 const Writers = () => {
@@ -57,13 +71,17 @@ const Writers = () => {
         <Subheader>
           Lista de Autores
         </Subheader>
-        <div className="newWwriter">
-          <Link to={`/writers/new`}> Novo Autor</Link>
-        </div>
       </Header>
+
       <Grid>
         { grid }
       </Grid>
+
+      <NewWriter>
+        <p>
+          <Link to={`/writers/new`}> Adicionar Autor</Link>
+        </p>
+      </NewWriter>
     </Container>
 
     

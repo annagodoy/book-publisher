@@ -3,6 +3,56 @@ import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    font-size: 2rm;
+  }
+`
+const Field = styled.div `
+  padding: 10px 20px;
+
+  input {
+    width: 50%;
+    height: 40px;
+    border-radius: 7px;
+    border: 2px solid #000000;
+    text-align: center;
+    font-size: 14px;
+  }
+`
+
+const BookSelect = styled.div`
+  select {
+    width: 49%;
+    height: 40px;
+    border-radius: 7px;
+    border: 2px solid #000000;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    color: #6d6d6d;
+  }
+`
+
+const Button = styled.div`
+  button { 
+    font-size: 18px;
+    width: 25%;
+    height: 45px;
+    border-radius: 12px;
+    margin-top: 15px;
+    color: #efefef;
+    background: #000000;
+    border: 1px solid #000000;
+  }
+`
+
 const NewBook = () => {
 
   const [book, setBook] = useState({});
@@ -50,45 +100,43 @@ const NewBook = () => {
   }
 
   return (
-    <div className="wrapper">
+    <Wrapper>
       <form onSubmit={handleSubmit} >
-        <div> Cadastrar novo livro: </div>
+        <h2> Cadastrar novo livro: </h2>
         
-        <div className="field">
+        <Field>
           <input type="text" name="title" placeholder="Nome do Livro" onChange={handleChange}/>
-        </div>
+        </Field>
 
-        <div className="field">
+        <Field>
           <input type="text" name="isbn" placeholder="ISBN" onChange={handleChange}/>
-        </div>
+        </Field>
 
-        <div className="field">
+        <Field>
           <input type="text" name="publish_date" placeholder="Data de Publicação" onChange={handleChange}/>
-        </div>
+        </Field>
 
-        <div className="field">
-          <div className="bookCategory">
-            <select 
-              onChange={handleChange} 
-              name="book_category_id">
-              { categories.map((options, i) => <option key={options.id} value={options.id}> {options.attributes.name} </option>) }
-            </select>
-          </div>
-        </div>
+        <BookSelect>
+          <select 
+            onChange={handleChange} 
+            name="book_category_id">
+            { categories.map((options, i) => <option key={options.id} value={options.id}> {options.attributes.name} </option>) }
+          </select>
+        </BookSelect>
 
-        <div className="field">
-          <div className="bookWriter">
-            <select 
-              onChange={handleChange} 
-              name="writer_id">
-              { writers.map((options, i) => <option key={options.id} value={options.id}> {options.attributes.name} </option>) }
-            </select>
-          </div>
-        </div>
+        <BookSelect>
+          <select 
+            onChange={handleChange} 
+            name="writer_id">
+            { writers.map((options, i) => <option key={options.id} value={options.id}> {options.attributes.name} </option>) }
+          </select>
+        </BookSelect>
 
-        <button type="submit"> Cadastrar Livro </button>
+        <Button>
+          <button type="submit"> Salvar </button>
+        </Button>
       </form>
-    </div>
+    </Wrapper>
   )
 }
 

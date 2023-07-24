@@ -3,6 +3,42 @@ import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h2 {
+    font-size: 2rm;
+  }
+`
+const Field = styled.div `
+  padding: 10px 20px;
+
+  input {
+    width: 50%;
+    height: 40px;
+    border-radius: 7px;
+    border: 2px solid #000000;
+    text-align: center;
+    font-size: 14px;
+  }
+`
+
+const Button = styled.div`
+  button { 
+    font-size: 18px;
+    width: 25%;
+    height: 45px;
+    border-radius: 12px;
+    margin-top: 15px;
+    color: #efefef;
+    background: #000000;
+    border: 1px solid #000000;
+  }
+`
+
 const NewWriter = () => {
 
   const [writer, setWriter] = useState({});
@@ -27,21 +63,23 @@ const NewWriter = () => {
   }
 
   return (
-    <div className="wrapper">
+    <Wrapper>
       <form onSubmit={handleSubmit} >
-        <div> Cadastrar novo autor: </div>
+        <h2> Cadastrar novo autor: </h2>
         
-        <div className="field">
+        <Field>
           <input type="text" name="name" placeholder="Nome do Autor" onChange={handleChange}/>
-        </div>
+        </Field>
 
-        <div className="field">
+        <Field>
           <input type="text" name="document" placeholder="Registro do Autor" onChange={handleChange}/>
-        </div>
+        </Field>
 
-        <button type="submit"> Cadastrar Autor </button>
+        <Button>
+          <button type="submit"> Salvar </button>
+        </Button>
       </form>
-    </div>
+    </Wrapper>
   )
 }
 
