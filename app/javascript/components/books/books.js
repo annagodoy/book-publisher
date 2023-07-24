@@ -79,6 +79,8 @@ const Books = () => {
   const [ books, setBooks] = useState([]);
   const [ query, setQuery] = useState([]);
 
+  const navigate = useNavigate(); 
+
   const handleChange = (e) => {
     e.preventDefault();
 
@@ -100,8 +102,14 @@ const Books = () => {
 
   useEffect(() => {
     axios.get('/api/v1/books.json')
-    .then( resp => setBooks(resp.data.data) )
-    .catch( resp => console.log(resp) )
+    .then( resp => {
+      setBooks(resp.data.data) 
+    })
+    .catch( resp => { 
+      if (resp.response.status == 401 || resp.response.status == '401'){
+        navigate('/login')
+      }
+    })
   }, [])
 
   const grid = books.map(item => {

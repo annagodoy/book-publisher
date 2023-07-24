@@ -1,3 +1,11 @@
 class ApplicationController < ActionController::Base
-  skip_before_action :verify_authenticity_token
+  include CurrentUserConcern
+  
+  def authenticate_user!
+    head :unauthorized unless signed_in?
+  end
+
+  def signed_in?
+    @current_user.present?
+  end
 end

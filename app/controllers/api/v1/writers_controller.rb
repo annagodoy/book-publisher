@@ -1,7 +1,8 @@
 module Api
   module V1
     class WritersController < ApplicationController
-      protect_from_forgery with: :null_session
+      before_action :authenticate_user!
+
       def index
         writers = Writer.all
         render json: WriterSerializer.new(writers, options).serialized_json

@@ -1,6 +1,7 @@
 module Api
   module V1
     class BookCategoriesController < ApplicationController
+      before_action :authenticate_user!
 
       def index
         category = BookCategory.all

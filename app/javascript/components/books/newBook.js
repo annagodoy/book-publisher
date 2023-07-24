@@ -53,6 +53,19 @@ const Button = styled.div`
   }
 `
 
+const TextField = styled.div`
+  padding: 10px 20px;
+
+  input {
+    width: 50%;
+    height: 100px;
+    border-radius: 7px;
+    border: 2px solid #000000;
+    text-align: center;
+    font-size: 14px;
+  }
+`
+
 const NewBook = () => {
 
   const [book, setBook] = useState({});
@@ -131,6 +144,10 @@ const NewBook = () => {
             { writers.map((options, i) => <option key={options.id} value={options.id}> {options.attributes.name} </option>) }
           </select>
         </BookSelect>
+
+        <TextField>
+          <input type="text" name="summary" placeholder="Resumo" onChange={handleChange}/>
+        </TextField>
 
         <Button>
           <button type="submit"> Salvar </button>

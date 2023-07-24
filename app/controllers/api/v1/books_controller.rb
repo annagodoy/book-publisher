@@ -1,7 +1,7 @@
 module Api
   module V1
     class BooksController < ApplicationController
-      protect_from_forgery with: :null_session
+      before_action :authenticate_user!
       
       def index
         books = Book.all
@@ -9,7 +9,6 @@ module Api
       end
 
       def show
-        # byebug
         book = Book.find_by(id: params[:id])
         render json: BookSerializer.new(book).serialized_json
       end

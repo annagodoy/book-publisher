@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -64,6 +64,22 @@ const Button = styled.div`
 `
 
 const Imports = () => {
+
+  const [session, setSession] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get('/api/v1/imports')
+    .then( resp => {
+      debugger
+      setSession(resp.data.data)
+    })
+    .catch( resp => { 
+      if (resp.response.status == 401 || resp.response.status == '401'){
+        navigate('/login')
+      }
+    })
+  }, [])
 
   let importTypes = [
     {label: 'Tipo de importação', value: ''},
@@ -131,6 +147,7 @@ const Imports = () => {
 
     </Wrapper>
   )
+ 
 }
 
 export default Imports

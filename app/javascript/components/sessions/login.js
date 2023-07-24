@@ -74,7 +74,10 @@ const Login = (props) => {
     .then( resp => {
       if (resp.data.logged_in){
         setUser(resp.data.user)
-        props.handleSuccessfulAuth(resp.data)
+        navigate('/home')
+        if (Object.keys(props).length > 0 ){
+          props.handleSuccessfulAuth(resp.data)
+        }
       }
     })
     .catch(resp => console.log(resp))

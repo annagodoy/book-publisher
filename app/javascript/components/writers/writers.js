@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import WriterElement from './writer';
 import styled from 'styled-components';
@@ -48,11 +48,17 @@ const NewWriter = styled.div`
 
 const Writers = () => {
   const [ writers, setWtriters] = useState([]);
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('/api/v1/writers.json')
     .then( resp => setWtriters(resp.data.data) )
-    .catch( resp => console.log(resp) )
+    .catch( resp => { 
+      if (resp.response.status == 401 || resp.response.status == '401'){
+        navigate('/login')
+      }
+    })
   }, [])
 
   const grid = writers.map(item => {
